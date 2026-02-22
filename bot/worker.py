@@ -21,7 +21,13 @@ class BotWorker:
                 self.bot.state.record_reply(uid)
                 await self.bot.server.broadcast_ws({"type": "stats", "stats": self.bot.state.stats})
                 await self.bot.server.studio_log(f"🤖 REPLY -> {user}: {response}", Fore.MAGENTA, type='reply')
-                await self.bot.server.log_event('reply', {'user': user, 'user_id': uid, 'trigger_id': trigger['id'], 'matched_comment': msg, 'response': response})
+                await self.bot.server.log_event('reply', {
+                    'user': user, 
+                    'user_id': uid, 
+                    'trigger_id': trigger.get('id', trigger.get('pattern', 'unknown')), 
+                    'matched_comment': msg, 
+                    'response': response
+                })
 
                 if self.bot.voice_agent:
                     gesture = "neutral"

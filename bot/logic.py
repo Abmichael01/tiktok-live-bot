@@ -66,7 +66,13 @@ class BotState:
         for trigger in self.triggers:
             if not trigger.get("enabled", True): continue
             
+            # Support both "keywords" (list) and "pattern" (string)
             keywords = trigger.get("keywords", [])
+            pattern = trigger.get("pattern")
+            
+            if not keywords and pattern:
+                keywords = [pattern]
+                
             match_type = trigger.get("match_type", "any")
             matched = [kw for kw in keywords if (kw if case_sensitive else kw.lower()) in comment_check]
 

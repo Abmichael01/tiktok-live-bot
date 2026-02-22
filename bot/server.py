@@ -12,12 +12,17 @@ class BotServer:
         self.bot = bot
         self.ws_clients = set()
 
-    async def studio_log(self, msg, color=Fore.WHITE, type='info'):
+    async def studio_log(self, msg, color=Fore.WHITE, type='info', user_label=None):
         ts = datetime.now().strftime("%H:%M:%S")
         print(f"{color}[{ts}] {msg}{Style.RESET_ALL}")
+        
+        display_user = user_label
+        if not display_user:
+            display_user = "STUDIO" if type == "info" else "BOT"
+            
         await self.broadcast_ws({
             "type": "comment" if type == "info" else type,
-            "user": "STUDIO" if type == "info" else "BOT",
+            "user": display_user,
             "comment": msg,
             "timestamp": ts
         })

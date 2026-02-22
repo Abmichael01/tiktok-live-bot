@@ -55,7 +55,7 @@ class BotEvents:
 
         state.stats['total_comments'] += 1
         await self.bot.server.broadcast_ws({"type": "stats", "stats": state.stats})
-        await self.bot.server.studio_log(f"{user}: {msg}", Fore.CYAN, type='comment')
+        await self.bot.server.studio_log(f"{user}: {msg}", Fore.CYAN, type='comment', user_label='CHAT')
         await self.bot.server.log_event('comment', {'user': user, 'user_id': uid, 'comment': msg, 'replied': False})
 
         trigger = state.match_comment(msg)
