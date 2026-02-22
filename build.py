@@ -63,9 +63,14 @@ def build():
 
     print(f"Running: {' '.join(cmd)}")
     
-    # Use the venv's pyinstaller if possible
+    # Use the venv's pyinstaller if possible, otherwise use system pyinstaller
     venv_pyinstaller = Path(".venv/Scripts/pyinstaller.exe") if os.name == 'nt' else Path(".venv/bin/pyinstaller")
     pyinst_path = str(venv_pyinstaller) if venv_pyinstaller.exists() else "pyinstaller"
+    
+    # In CI environments, always prefer the system path
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        pyinst_path = "pyinstaller"
+
     cmd[0] = pyinst_path
 
     result = subprocess.run(cmd)
