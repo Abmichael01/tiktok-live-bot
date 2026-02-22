@@ -29,6 +29,10 @@ def build():
     # Build command
     icon_file = "icon.ico" if os.name == 'nt' else "icon.png"
     
+    # Dynamically find site-packages for deep scanning
+    import site
+    packages_path = site.getsitepackages()[0] if site.getsitepackages() else ""
+    
     cmd = [
         "pyinstaller",
         "--noconfirm",
@@ -36,34 +40,38 @@ def build():
         "--windowed",
         "--name", "TikTokLiveBot",
         f"--icon={icon_file}" if Path(icon_file).exists() else "",
-        # Explicitly include PySide6 submodules to avoid MissingModule errors
+        "--clean",
+        # Force paths so CI finds the libs
+        "--paths", packages_path,
+        # Explicitly include PySide6 submodules
         "--hidden-import", "PySide6.QtCore",
         "--hidden-import", "PySide6.QtGui",
         "--hidden-import", "PySide6.QtWidgets",
         "--hidden-import", "PySide6.QtWebEngineCore",
         "--hidden-import", "PySide6.QtWebEngineWidgets",
         "--hidden-import", "PySide6.QtWebChannel",
-        # Use hooks to collect everything related to PySide6
+        "--hidden-import", "PySide6.QtPrintSupport",
+        # Collect ALL files for major libs
         "--collect-all", "PySide6",
+        "--collect-all", "pygame",
+        "--collect-all", "aiohttp",
+        "--collect-all", "colorama",
     ] + data_args + ["launcher.py"]
     
-    # Filter out empty arguments if icon doesn't exist
+    # Filter out empty arguments
     cmd = [arg for arg in cmd if arg]
 
     print(f"Running: {' '.join(cmd)}")
     
     # Use the venv's pyinstaller if possible
-    venv_pyinstaller = Path(".venv/bin/pyinstaller")
-    if os.name == 'nt':
-        venv_pyinstaller = Path(".venv/Scripts/pyinstaller.exe")
-    
+    venv_pyinstaller = Path(".venv/Scripts/pyinstaller.exe") if os.name == 'nt' else Path(".venv/bin/pyinstaller")
     pyinst_path = str(venv_pyinstaller) if venv_pyinstaller.exists() else "pyinstaller"
     cmd[0] = pyinst_path
 
     result = subprocess.run(cmd)
 
     if result.returncode == 0:
-        print("Icons generated successfully!")
+        print("\nBuild complete!")
         print(f"Output: dist/TikTokLiveBot{' .exe' if os.name == 'nt' else ''}")
     else:
         print("\nBuild failed.")
