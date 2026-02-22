@@ -46,8 +46,19 @@ class TikTokChatBot:
         from TikTokLive.events import ConnectEvent, DisconnectEvent, CommentEvent, LikeEvent, GiftEvent, FollowEvent
         if self.state.running: return
         self.state.running = True
+        
+        # Configuration for custom signature server
+        sign_url = self.state.settings.get("sign_server_url", "https://w-sign.com/api/v1/sign")
+        
         await self.server.broadcast_ws({"type": "status", "connected": "connecting"})
-        self.client = TikTokLiveClient(unique_id=f"@{self.username}")
+        
+        # Initialize client with optional sign server
+        # Note: Depending on library version, this might need different params
+        self.client = TikTokLiveClient(
+            unique_id=f"@{self.username}",
+            sign_url=sign_url
+        )
+        
         self.client.on(ConnectEvent)(self.events.on_connect)
         self.client.on(DisconnectEvent)(self.events.on_disconnect)
         self.client.on(CommentEvent)(self.events.on_comment)
@@ -55,11 +66,20 @@ class TikTokChatBot:
         self.client.on(GiftEvent)(self.events.on_gift)
         self.client.on(FollowEvent)(self.events.on_follow)
         
-        await self.server.studio_log(f"🚀 Connecting to @{self.username}...")
-        try: await self.client.start()
-        except Exception as e:
-            self.state.running = False
-            await self.server.studio_log(f"❌ Connection failed: {e}", Fore.RED)
+        max_retries = 3
+        for attempt in range(1, max_retries + 1):
+            await self.server.studio_log(f"🚀 Connecting to @{self.username} (Attempt {attempt}/{max_retries})...")
+            try:
+                await self.client.start()
+                break # Success!
+            except Exception as e:
+                logger.error(f"Connection attempt {attempt} failed: {e}")
+                if attempt < max_retries:
+                    await self.server.studio_log(f"⚠️ Connection failed, retrying in 5s...", Fore.YELLOW)
+                    await asyncio.sleep(5)
+                else:
+                    self.state.running = False
+                    await self.server.studio_log(f"❌ Connection failed after {max_retries} attempts: {e}", Fore.RED)
 
     async def stop_tiktok(self):
         if not self.state.running: return

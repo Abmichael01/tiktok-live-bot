@@ -23,7 +23,15 @@ python launcher.py
 python build.py
 ```
 
-Delivers: `dist/TikTokLiveBot.exe`
+Delivers: `dist/TikTokLiveBot_Setup.exe` (A professional Windows Installer)
+
+---
+
+## 🔧 Connection Reliability
+If the bot fails to connect with a `httpx.ConnectError`, you can now:
+1.  Go to the **Settings** tab.
+2.  Update the **Signature Server URL** (check the Discord/GitHub for working servers).
+3.  The bot will automatically retry 3 times before giving up.
 
 ---
 

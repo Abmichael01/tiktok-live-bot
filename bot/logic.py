@@ -45,6 +45,8 @@ class BotState:
                 self.settings["simli_face_id"] = "9facea83-ad2d-45f4-8f68-9061937a67ca"
             if "tiktok_username" not in self.settings:
                 self.settings["tiktok_username"] = ""
+            if "sign_server_url" not in self.settings:
+                self.settings["sign_server_url"] = "https://w-sign.com/api/v1/sign" # Example default
                 
             logger.info(f"{Fore.GREEN}✅ Loaded {len(self.triggers)} triggers")
         except FileNotFoundError:

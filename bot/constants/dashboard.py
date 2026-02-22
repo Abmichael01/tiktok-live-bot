@@ -226,6 +226,11 @@ DASHBOARD_HTML = """
                     <input type="text" id="simli-face-id" placeholder="Enter ID">
                 </div>
                 <div class="field-group">
+                    <label>Signature Server (Custom)</label>
+                    <input type="text" id="sign-server-url" placeholder="https://...">
+                    <div style="font-size: 10px; color: var(--text-dim); margin-top: 4px;">Use this if you encounter connection errors or are in a restricted region.</div>
+                </div>
+                <div class="field-group">
                     <label>Avatar Dimensions (Portrait: 360x640)</label>
                     <div style="display:flex; gap:10px;">
                         <input type="text" id="av-width" value="360" style="flex:1;">
@@ -269,6 +274,7 @@ DASHBOARD_HTML = """
                         document.getElementById('simli-api-key').value = data.settings.simli_api_key || "";
                         document.getElementById('simli-face-id').value = data.settings.simli_face_id || "";
                         document.getElementById('tiktok-username').value = data.settings.tiktok_username || "";
+                        document.getElementById('sign-server-url').value = data.settings.sign_server_url || "";
                         document.getElementById('username-input-lock').value = data.settings.tiktok_username || "";
                     }
                 } else if (data.type === 'settings_saved') {
@@ -328,7 +334,8 @@ DASHBOARD_HTML = """
                 settings: {
                     tiktok_username: document.getElementById('tiktok-username').value.trim(),
                     simli_api_key: document.getElementById('simli-api-key').value.trim(),
-                    simli_face_id: document.getElementById('simli-face-id').value.trim()
+                    simli_face_id: document.getElementById('simli-face-id').value.trim(),
+                    sign_server_url: document.getElementById('sign-server-url').value.trim()
                 }
             }));
         }

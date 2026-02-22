@@ -10,7 +10,7 @@
     },
     {
       "pattern": "institution",
-      "response": "Institutional money stays in the game. They run risk models that force selling when volatility spikes—not because they lost faith, but because algorithms command it. That creates the cascade we buy."
+      "response": "Institutional money stays in the game. They run risk models that force selling when volatility spikes\u2014not because they lost faith, but because algorithms command it. That creates the cascade we buy."
     },
     {
       "pattern": "risk model",
@@ -22,7 +22,7 @@
     },
     {
       "pattern": "snapback",
-      "response": "Bitcoin doesn't just recover—it SNAPS back. Every forced seller on the way down becomes a forced buyer on the way up. The system that accelerates crashes also fuels the rally."
+      "response": "Bitcoin doesn't just recover\u2014it SNAPS back. Every forced seller on the way down becomes a forced buyer on the way up. The system that accelerates crashes also fuels the rally."
     },
     {
       "pattern": "recovery",
@@ -66,7 +66,7 @@
     },
     {
       "pattern": "eth",
-      "response": "Ethereum is the backbone of DeFi. Keep an eye on the gas fees and network activity — that's where the real smart money is flowing right now."
+      "response": "Ethereum is the backbone of DeFi. Keep an eye on the gas fees and network activity \u2014 that's where the real smart money is flowing right now."
     },
     {
       "pattern": "sol",
@@ -74,7 +74,7 @@
     },
     {
       "pattern": "buy",
-      "response": "Buying into panic is where fortunes are made. But don't just jump in — wait for our signal on the volume profile and RSI divergence."
+      "response": "Buying into panic is where fortunes are made. But don't just jump in \u2014 wait for our signal on the volume profile and RSI divergence."
     },
     {
       "pattern": "sell",
