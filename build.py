@@ -36,7 +36,14 @@ def build():
         "--windowed",
         "--name", "TikTokLiveBot",
         f"--icon={icon_file}" if Path(icon_file).exists() else "",
-        # Automatically collect all PySide6 related files
+        # Explicitly include PySide6 submodules to avoid MissingModule errors
+        "--hidden-import", "PySide6.QtCore",
+        "--hidden-import", "PySide6.QtGui",
+        "--hidden-import", "PySide6.QtWidgets",
+        "--hidden-import", "PySide6.QtWebEngineCore",
+        "--hidden-import", "PySide6.QtWebEngineWidgets",
+        "--hidden-import", "PySide6.QtWebChannel",
+        # Use hooks to collect everything related to PySide6
         "--collect-all", "PySide6",
     ] + data_args + ["launcher.py"]
     
