@@ -51,8 +51,11 @@ def build():
         "--hidden-import", "PySide6.QtWebEngineWidgets",
         "--hidden-import", "PySide6.QtWebChannel",
         "--hidden-import", "PySide6.QtPrintSupport",
+        "--hidden-import", "shiboken6",
         # Collect ALL files for major libs
         "--collect-all", "PySide6",
+        "--collect-all", "shiboken6",
+        "--collect-submodules", "PySide6",
         "--collect-all", "pygame",
         "--collect-all", "aiohttp",
         "--collect-all", "colorama",

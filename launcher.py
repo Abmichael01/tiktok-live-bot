@@ -6,9 +6,17 @@ import asyncio
 import threading
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtCore import QUrl, Qt, QSize, QThread
+from PySide6.QtCore import QUrl, Qt, QSize, QThread, QCoreApplication
 from PySide6.QtGui import QIcon
 from bot.main import TikTokChatBot
+
+# Fix for standalone EXE plugin paths
+if getattr(sys, 'frozen', False):
+    basedir = sys._MEIPASS
+    QCoreApplication.addLibraryPath(os.path.join(basedir, 'PySide6', 'plugins'))
+    QCoreApplication.addLibraryPath(os.path.join(basedir, 'PySide6', 'Qt', 'plugins'))
+    # Set the path for the webengine process as well
+    os.environ['QTWEBENGINEPROCESS_PATH'] = os.path.join(basedir, 'PySide6', 'QtWebEngineProcess.exe' if os.name == 'nt' else 'QtWebEngineProcess')
 
 # Fix for Fontconfig error on some Linux distros
 if os.name != 'nt':
