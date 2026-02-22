@@ -36,7 +36,7 @@ def build():
     cmd = [
         "pyinstaller",
         "--noconfirm",
-        "--onefile",
+        "--onedir",
         "--windowed",
         "--name", "TikTokLiveBot",
         f"--icon={icon_file}" if Path(icon_file).exists() else "",

@@ -119,6 +119,22 @@
     {
       "pattern": "signal",
       "response": "We don't just give signals, we give education. Understanding WHY a trade works is more valuable than just following a call."
+    },
+    {
+      "pattern": "hi",
+      "response": "Hi there! Welcome to the stream. We are diving deep into market mechanics today."
+    },
+    {
+      "pattern": "hey",
+      "response": "Hey! Glad to have you here. Let's look at some charts and find the next trade."
+    },
+    {
+      "pattern": "morning",
+      "response": "Good morning! New day, new opportunities. The charts are looking interesting today."
+    },
+    {
+      "pattern": "evening",
+      "response": "Good evening! Wrapping up the day's action. Let's see how the market closed."
     }
   ],
   "settings": {

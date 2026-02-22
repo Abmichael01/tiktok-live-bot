@@ -33,8 +33,12 @@ jobs:
       run: |
         python build.py
 
+    - name: Zip Build Folder
+      run: |
+        powershell Compress-Archive -Path dist/TikTokLiveBot -DestinationPath dist/TikTokLiveBot-Windows.zip
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: TikTokLiveBot-Windows
-        path: dist/TikTokLiveBot.exe
+        path: dist/TikTokLiveBot-Windows.zip
