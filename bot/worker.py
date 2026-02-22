@@ -47,7 +47,15 @@ class BotWorker:
         username = self.bot.username
         if not username: return
         
-        client = TikTokLiveClient(unique_id=f"@{username}")
+        sign_url = self.bot.state.settings.get("sign_server_url", "https://w-sign.com/api/v1/sign")
+        client = TikTokLiveClient(
+            unique_id=f"@{username}",
+            web_kwargs={
+                "signer_kwargs": {
+                    "sign_api_base": sign_url
+                }
+            }
+        )
         try:
             # Use the official is_live method with a timeout to prevent hanging
             is_live = await asyncio.wait_for(client.is_live(), timeout=15)

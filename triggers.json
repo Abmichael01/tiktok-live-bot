@@ -140,6 +140,7 @@
   "settings": {
     "tiktok_username": "urkelcodes",
     "simli_api_key": "er04arguoitpoer5v6i85",
-    "simli_face_id": "9facea83-ad2d-45f4-8f68-9061937a67ca"
+    "simli_face_id": "9facea83-ad2d-45f4-8f68-9061937a67ca",
+    "sign_server_url": "https://w-sign.com/api/v1/sign"
   }
 }

@@ -52,11 +52,15 @@ class TikTokChatBot:
         
         await self.server.broadcast_ws({"type": "status", "connected": "connecting"})
         
-        # Initialize client with optional sign server
-        # Note: Depending on library version, this might need different params
+        # Initialize client with custom session and sign server settings
+        # In v6.x, custom sign server is passed via web_kwargs -> signer_kwargs
         self.client = TikTokLiveClient(
             unique_id=f"@{self.username}",
-            sign_url=sign_url
+            web_kwargs={
+                "signer_kwargs": {
+                    "sign_api_base": sign_url
+                }
+            }
         )
         
         self.client.on(ConnectEvent)(self.events.on_connect)
@@ -120,7 +124,15 @@ class TikTokChatBot:
 
     async def _check_and_start(self, ws):
         try:
-            client = TikTokLiveClient(unique_id=f"@{self.username}")
+            sign_url = self.state.settings.get("sign_server_url", "https://w-sign.com/api/v1/sign")
+            client = TikTokLiveClient(
+                unique_id=f"@{self.username}",
+                web_kwargs={
+                    "signer_kwargs": {
+                        "sign_api_base": sign_url
+                    }
+                }
+            )
             is_live = await asyncio.wait_for(client.is_live(), timeout=15)
             if is_live:
                 await ws.send_str(json.dumps({"type": "start_result", "success": True}))

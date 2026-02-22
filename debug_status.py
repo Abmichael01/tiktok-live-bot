@@ -5,7 +5,14 @@ import sys
 
 async def debug_status(username):
     print(f"Debugging status for @{username}...")
-    client = TikTokLiveClient(unique_id=f"@{username}")
+    client = TikTokLiveClient(
+        unique_id=f"@{username}",
+        web_kwargs={
+            "signer_kwargs": {
+                "sign_api_base": "https://w-sign.com/api/v1/sign"
+            }
+        }
+    )
     try:
         room_info = await client.retrieve_room_info()
         print("\nRAW ROOM INFO RECEIVED:")
