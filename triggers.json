@@ -1,0 +1,129 @@
+{
+  "triggers": [
+    {
+      "pattern": "crash",
+      "response": "Crashes don't destroy wealth, they TRANSFER it. From the panicked to the prepared. While the fearful lose their minds, the financially educated are positioning for the transfer."
+    },
+    {
+      "pattern": "wealth",
+      "response": "Wealth transfer happens when the crowd is losing its faith. Bitcoin's recent 15% dip illustrated it perfectly: panic sellers got squeezed while institutional money was flowing IN, not out."
+    },
+    {
+      "pattern": "institution",
+      "response": "Institutional money stays in the game. They run risk models that force selling when volatility spikes—not because they lost faith, but because algorithms command it. That creates the cascade we buy."
+    },
+    {
+      "pattern": "risk model",
+      "response": "Institutions sell automatically based on risk models when volatility hits. It's mechanical, automatic, and violent. We don't fear the machine; we use its forced flows to get better entries."
+    },
+    {
+      "pattern": "volatility",
+      "response": "When volatility spikes hit, risk models trigger a selling cascade. This disconnects price from fundamentals, creating a huge gap that leads to the inevitable snapback."
+    },
+    {
+      "pattern": "snapback",
+      "response": "Bitcoin doesn't just recover—it SNAPS back. Every forced seller on the way down becomes a forced buyer on the way up. The system that accelerates crashes also fuels the rally."
+    },
+    {
+      "pattern": "recovery",
+      "response": "Most investors miss the recovery because they are too busy being confused about the crash. We understand the mechanics of forced flows and position intelligently for the rally."
+    },
+    {
+      "pattern": "hedge",
+      "response": "Dealer hedging and basis trades create mechanical pressure. When those unwound trades are put back on, they push prices higher just as violently as they pushed them lower."
+    },
+    {
+      "pattern": "liquidated",
+      "response": "Being liquidated means you were exit liquidity for the prepared. We teach you to see the mechanical flows so you stay in the trade while others are being washed out."
+    },
+    {
+      "pattern": "exposure",
+      "response": "When algorithms say reduce exposure, they don't care about the 'why.' They just sell. That forced selling is exactly what creates the opportunity for the financially educated trader."
+    },
+    {
+      "pattern": "mark moss",
+      "response": "Mark Moss understands that the system accelerating crashes is the SAME one that accelerates rallies. It's all about forced buyers and sellers. It's pure market mechanics."
+    },
+    {
+      "pattern": "bitcoin owners",
+      "response": "Bitcoin ownership has changed. It's inside institutional portfolios now, which means price action is driven by risk models and dealer hedging more than retail sentiment."
+    },
+    {
+      "pattern": "forced",
+      "response": "Forced selling creates the dip; forced buying creates the snapback. If you aren't positioning for forced moves, you're just trading on hope."
+    },
+    {
+      "pattern": "educated",
+      "response": "The financially educated trader sees mechanical flows where others see chaos. Positioning intelligently means understanding how wealth is being transferred in real-time."
+    },
+    {
+      "pattern": "automatic",
+      "response": "Automatic selling cascades are violent but predictable. Institutions follow the math, not the heart. Follow the flow, ignore the panic."
+    },
+    {
+      "pattern": "btc",
+      "response": "Bitcoin is the king of the market. When institutional players move, BTC leads the charge. We monitor volume and liquidity to catch the next big leg up."
+    },
+    {
+      "pattern": "eth",
+      "response": "Ethereum is the backbone of DeFi. Keep an eye on the gas fees and network activity — that's where the real smart money is flowing right now."
+    },
+    {
+      "pattern": "sol",
+      "response": "Solana is showing incredible speed and adoption. The ecosystem is growing fast. We look for entries near support when retail starts panicking."
+    },
+    {
+      "pattern": "buy",
+      "response": "Buying into panic is where fortunes are made. But don't just jump in — wait for our signal on the volume profile and RSI divergence."
+    },
+    {
+      "pattern": "sell",
+      "response": "Knowing when to take profit is harder than knowing when to buy. Lock in those gains when the crowd is most bullish!"
+    },
+    {
+      "pattern": "pump",
+      "response": "Pumps are fun, but don't get exit liquidity. Always check the order book for spoofing before you fomo in."
+    },
+    {
+      "pattern": "dump",
+      "response": "A dump is just a discount for prepared traders. We wait for the 'wash out' candle before looking for a reversal."
+    },
+    {
+      "pattern": "risk",
+      "response": "Risk management is the only thing that keeps you in the game. Never risk more than 1-2% of your capital on a single trade."
+    },
+    {
+      "pattern": "strategy",
+      "response": "Our strategy is simple: follow the smart money, ignore the noise, and wait for high-probability setups at key horizontal levels."
+    },
+    {
+      "pattern": "liveriver",
+      "response": "Welcome to the live! We are breaking down the charts in real-time. Drop your favorite ticker in the comments!"
+    },
+    {
+      "pattern": "hello",
+      "response": "Hello! Welcome to the trading room. We're analyzing the markets and looking for the next big move. Stick around!"
+    },
+    {
+      "pattern": "help",
+      "response": "Need help? Just ask about any coin or trading term. We also have a setup guide in the bot dashboard!"
+    },
+    {
+      "pattern": "moon",
+      "response": "To the moon? Maybe. But let's look at the resistance levels first. Smart traders don't trade on hope, they trade on data."
+    },
+    {
+      "pattern": "scam",
+      "response": "Always do your own research! If it sounds too good to be true in crypto, it usually is. Stay safe out there."
+    },
+    {
+      "pattern": "signal",
+      "response": "We don't just give signals, we give education. Understanding WHY a trade works is more valuable than just following a call."
+    }
+  ],
+  "settings": {
+    "tiktok_username": "urkelcodes",
+    "simli_api_key": "er04arguoitpoer5v6i85",
+    "simli_face_id": "9facea83-ad2d-45f4-8f68-9061937a67ca"
+  }
+}

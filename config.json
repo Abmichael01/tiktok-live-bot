@@ -1,0 +1,5 @@
+{
+  "sessionid": "c49054348c237001acacef03bdbc7a1c",
+  "tt_target_idc": "alisg",
+  "_instructions": "1. Go to tiktok.com and log in. 2. Press F12 > Application > Storage > Cookies > tiktok.com. 3. Copy the values of 'sessionid' and 'tt-target-idc' and paste them above. 4. Restart the bot. The sessionid refreshes every ~2 months."
+}
