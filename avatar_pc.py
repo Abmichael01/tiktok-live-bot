@@ -31,9 +31,9 @@ class SimliAvatarPC:
         try:
             # Use small buffer to reduce latency
             pygame.mixer.init(frequency=48000, size=-16, channels=1, buffer=512)
-            logger.info("✅ PyGame Audio initialized (48kHz)")
+            logger.info("PyGame Audio initialized (48kHz)")
         except Exception as e:
-            logger.error(f"❌ Failed to initialize audio: {e}")
+            logger.error(f"Failed to initialize audio: {e}")
             return
 
         # Initialize Simli
@@ -51,18 +51,18 @@ class SimliAvatarPC:
         )
         
         try:
-            logger.info("🔗 Connecting to Simli servers...")
+            logger.info("Connecting to Simli servers...")
             await self.simli_client.start()
-            logger.info("✅ Simli Connection Established (SFU Mode)")
+            logger.info("Simli Connection Established (SFU Mode)")
         except Exception as e:
-            logger.error(f"❌ Failed to start Simli Client: {e}")
+            logger.error(f"Failed to start Simli Client: {e}")
             return
 
         # Start loops
         asyncio.create_task(self.video_render_loop())
         asyncio.create_task(self.audio_playback_loop())
         
-        logger.info("🚀 PC Avatar is READY! (Press Q in the video window to stop)")
+        logger.info("PC Avatar is READY! (Press Q in the video window to stop)")
         
         await self.ws_loop()
 
@@ -93,7 +93,7 @@ class SimliAvatarPC:
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.ws_connect(WS_URL) as ws:
-                        logger.info(f"🔗 Connected to Bot WebSocket at {WS_URL}")
+                        logger.info(f"Connected to Bot WebSocket at {WS_URL}")
                         async for msg in ws:
                             if self._stop_event.is_set():
                                 break
@@ -122,7 +122,7 @@ class SimliAvatarPC:
             await self.simli_client.stop()
         pygame.mixer.quit()
         cv2.destroyAllWindows()
-        logger.info("🛑 PC Avatar stopped")
+        logger.info("PC Avatar stopped")
 
 if __name__ == "__main__":
     avatar = SimliAvatarPC()

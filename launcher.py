@@ -110,7 +110,7 @@ class TikTokStudioLauncher:
         sys.exit(code)
 
     def cleanup(self):
-        print("🛑 Stopping bot server...")
+        print("Stopping bot server...")
         if self.bot_thread:
             self.bot_thread.terminate()
             self.bot_thread.wait()

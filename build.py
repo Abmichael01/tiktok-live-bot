@@ -14,7 +14,7 @@ FILE_DATAS = [
 ]
 
 def build():
-    print("🔨 Preparing build for TikTok Live Bot...")
+    print("Preparing build for TikTok Live Bot...")
 
     # Build data arguments for PyInstaller
     # Note: On Windows use ; as separator, on Linux use :
@@ -24,7 +24,7 @@ def build():
         if Path(src).exists():
             data_args.append(f"--add-data={src}{sep}{dst}")
         else:
-            print(f"⚠️ Warning: {src} not found, skipping...")
+            print(f"Warning: {src} not found, skipping...")
 
     # Build command
     icon_file = "icon.ico" if os.name == 'nt' else "icon.png"
@@ -43,7 +43,7 @@ def build():
     # Filter out empty arguments if icon doesn't exist
     cmd = [arg for arg in cmd if arg]
 
-    print(f"🚀 Running: {' '.join(cmd)}")
+    print(f"Running: {' '.join(cmd)}")
     
     # Use the venv's pyinstaller if possible
     venv_pyinstaller = Path(".venv/bin/pyinstaller")
@@ -56,10 +56,10 @@ def build():
     result = subprocess.run(cmd)
 
     if result.returncode == 0:
-        print("\n✅ Build complete!")
-        print(f"📦 Output: dist/TikTokLiveBot{' .exe' if os.name == 'nt' else ''}")
+        print("Icons generated successfully!")
+        print(f"Output: dist/TikTokLiveBot{' .exe' if os.name == 'nt' else ''}")
     else:
-        print("\n❌ Build failed.")
+        print("\nBuild failed.")
 
 if __name__ == "__main__":
     build()
