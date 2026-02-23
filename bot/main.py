@@ -169,7 +169,8 @@ class TikTokChatBot:
         app = web.Application()
         app.router.add_get("/", self.server.serve_dashboard)
         app.router.add_get("/simli", self.server.serve_simli)
-        app.router.add_get("/favicon.ico", lambda r: web.FileResponse("icon.png"))
+        from bot.constants.config import get_resource_path
+        app.router.add_get("/favicon.ico", lambda r: web.FileResponse(get_resource_path("icon.png")))
         app.router.add_get("/ws", self.server.ws_handler)
         
         runner = web.AppRunner(app)
