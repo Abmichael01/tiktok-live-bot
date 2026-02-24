@@ -11,6 +11,8 @@ FILE_DATAS = [
     ("triggers.json", "."),
     ("voice.py", "."),
     ("icon.png", "."),
+    ("ffmpeg.exe", "."),
+    ("ffprobe.exe", "."),
 ]
 
 def build():

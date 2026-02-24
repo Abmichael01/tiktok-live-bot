@@ -59,6 +59,31 @@ except ImportError:
     logger.warning("pygame not installed — voice will generate but not play")
     logger.warning("Run: pip install pygame")
 
+def get_resource_path(relative_path):
+    """ Get path to file bundled INSIDE the executable """
+    try:
+        import sys
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return Path(base_path) / relative_path
+
+# -- Configure AudioSegment to use bundled ffmpeg if available ----------------
+if PYDUB_AVAILABLE:
+    ffmpeg_bin = "ffmpeg.exe" if os.name == 'nt' else "ffmpeg"
+    ffprobe_bin = "ffprobe.exe" if os.name == 'nt' else "ffprobe"
+    
+    ffmpeg_bundled = get_resource_path(ffmpeg_bin)
+    ffprobe_bundled = get_resource_path(ffprobe_bin)
+    
+    if ffmpeg_bundled.exists():
+        AudioSegment.converter = str(ffmpeg_bundled)
+        logger.info(f"✅ Voice Engine (Bundled FFmpeg) found: {ffmpeg_bundled}")
+    
+    if ffprobe_bundled.exists():
+        AudioSegment.ffprobe = str(ffprobe_bundled)
+        logger.info(f"✅ Voice Engine (Bundled FFprobe) found: {ffprobe_bundled}")
+
 
 class VoiceAgent:
     def __init__(

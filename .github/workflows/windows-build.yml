@@ -29,6 +29,16 @@ jobs:
       run: |
         python generate_icons.py
 
+    - name: Download FFmpeg
+      run: |
+        curl -L https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip -o ffmpeg.zip
+        powershell Expand-Archive ffmpeg.zip -DestinationPath ffmpeg_temp
+        # Move binaries to root for build.py to find
+        Get-ChildItem -Path ffmpeg_temp -Filter ffmpeg.exe -Recurse | Copy-Item -Destination .
+        Get-ChildItem -Path ffmpeg_temp -Filter ffprobe.exe -Recurse | Copy-Item -Destination .
+        rm ffmpeg.zip
+        rm -r ffmpeg_temp
+
     - name: Run Build Script
       run: |
         python build.py
