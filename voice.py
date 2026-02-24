@@ -29,7 +29,15 @@ import tempfile
 import base64
 from pathlib import Path
 from typing import Optional, Callable
-from pydub import AudioSegment
+
+# -- Try importing pydub for audio conversion ---------------------------------
+try:
+    from pydub import AudioSegment
+    PYDUB_AVAILABLE = True
+except ImportError:
+    PYDUB_AVAILABLE = False
+    logger.warning("pydub not installed — Simli avatar voice will not work")
+    logger.warning("Run: pip install pydub")
 
 import edge_tts
 
@@ -188,6 +196,9 @@ class VoiceAgent:
 
         # Convert MP3 to PCM16 16kHz using pydub
         try:
+            if not PYDUB_AVAILABLE:
+                raise ImportError("pydub is not installed. Run 'pip install pydub'")
+            
             audio_segment = AudioSegment.from_file(io.BytesIO(audio_bytes), format="mp3")
             audio_segment = audio_segment.set_frame_rate(16000).set_channels(1).set_sample_width(2)
             
@@ -196,7 +207,11 @@ class VoiceAgent:
             duration = len(pcm_bytes) / 32000.0 # 16000Hz * 1ch * 2 bytes
             return base64.b64encode(pcm_bytes).decode('utf-8'), duration
         except Exception as e:
-            logger.error(f"Failed to convert audio for Simli: {e}")
+            if "ffprobe" in str(e).lower() or "ffmpeg" in str(e).lower():
+                logger.error("❌ Audio conversion failed: ffmpeg/ffprobe not found on system.")
+                logger.error("💡 Fix: Install ffmpeg (https://ffmpeg.org) and add its 'bin' folder to your system PATH.")
+            else:
+                logger.error(f"Failed to convert audio for Simli: {e}")
             return None, 0.0
 
     async def _play_audio_locally(self, text: str):
