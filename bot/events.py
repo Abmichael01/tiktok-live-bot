@@ -20,7 +20,31 @@ class BotEvents:
             "username": self.bot.username,
             "live_status": "LIVE"
         })
+        
+        # Trigger Automated Welcome Message
+        welcome_text = """Most people are watching the charts right now and seeing a disaster.
 
+Me? I’m seeing a massive, mechanical transfer of wealth.
+
+Welcome to the stream. I’m your Market Mechanic.
+
+While the panicked are selling, and the uneducated are getting liquidated... something else is happening behind the curtain. The big money? They aren't leaving. They’re positioning.
+
+Today, we aren’t talking about 'hope' or 'vibes.' We’re talking about mechanics. We’re breaking down why the algorithms forced that 15% drop, why the 'Snapback' is mathematically inevitable, and how you can stop being the liquidity for someone else’s exit.
+
+Drop your questions in the chat. Tell me what you're holding, and I'll tell you if you're holding a bag... or a golden ticket to the recovery.
+
+Let’s get to work."""
+        
+        await self.bot.server.broadcast_ws({
+            "type": "speaking",
+            "status": True,
+            "text": welcome_text,
+            "user": "SYSTEM"
+        })
+        
+        await self.bot.server.studio_log(f"🤖 WELCOME MESSAGE SENT", Fore.MAGENTA, type='reply')
+        
     async def on_disconnect(self, event: DisconnectEvent):
         self.bot.state.stats["connected"] = False
         self.bot.state.stats["live_status"] = "OFFLINE"
@@ -54,13 +78,17 @@ class BotEvents:
         if len(state.seen_comment_ids) > 500: state.seen_comment_ids = set(list(state.seen_comment_ids)[100:])
 
         state.stats['total_comments'] += 1
+        state.stats['total_replies'] += 1 # Every comment gets an AI response
         await self.bot.server.broadcast_ws({"type": "stats", "stats": state.stats})
         await self.bot.server.studio_log(f"{user}: {msg}", Fore.CYAN, type='comment', user_label='CHAT')
-        await self.bot.server.log_event('comment', {'user': user, 'user_id': uid, 'comment': msg, 'replied': False})
+        await self.bot.server.log_event('comment', {'user': user, 'user_id': uid, 'comment': msg, 'replied': True})
 
-        trigger = state.match_comment(msg)
-        if trigger:
-            await self.bot.reply_queue.put({'user': user, 'user_id': uid, 'comment': msg, 'trigger': trigger, 'response': trigger['response']})
+        # Send directly to Tavus via WebSocket broadcast
+        await self.bot.server.broadcast_ws({
+            "type": "incoming_comment",
+            "user": user,
+            "comment": msg
+        })
 
     async def on_like(self, event: LikeEvent):
         count = event.count if hasattr(event, 'count') else 1

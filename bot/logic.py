@@ -38,15 +38,16 @@ class BotState:
             self.triggers = self.config.get("triggers", [])
             self.settings = self.config.get("settings", {})
             
-            # Ensure Simli settings exist with defaults
-            if "simli_api_key" not in self.settings:
-                self.settings["simli_api_key"] = "er04arguoitpoer5v6i85"
-            if "simli_face_id" not in self.settings:
-                self.settings["simli_face_id"] = "9facea83-ad2d-45f4-8f68-9061937a67ca"
             if "tiktok_username" not in self.settings:
                 self.settings["tiktok_username"] = ""
             if "sign_server_url" not in self.settings:
                 self.settings["sign_server_url"] = "https://w-sign.com/api/v1/sign" # Example default
+            if "tavus_api_key" not in self.settings:
+                self.settings["tavus_api_key"] = "264f2cf5c17c4c819123e4814836829d"
+            if "tavus_persona_id" not in self.settings:
+                self.settings["tavus_persona_id"] = "pa290c2b7162"
+            if "tavus_replica_id" not in self.settings:
+                self.settings["tavus_replica_id"] = "rf4e9d9790f0"
                 
             logger.info(f"{Fore.GREEN}✅ Loaded {len(self.triggers)} triggers")
         except FileNotFoundError:
@@ -59,28 +60,7 @@ class BotState:
             json.dump({"triggers": self.triggers, "settings": self.settings}, f, indent=2)
         logger.info(f"{Fore.CYAN}💾 Config saved")
 
-    def match_comment(self, comment: str) -> Optional[dict]:
-        case_sensitive = self.settings.get("case_sensitive", False)
-        comment_check = comment if case_sensitive else comment.lower()
-
-        for trigger in self.triggers:
-            if not trigger.get("enabled", True): continue
-            
-            # Support both "keywords" (list) and "pattern" (string)
-            keywords = trigger.get("keywords", [])
-            pattern = trigger.get("pattern")
-            
-            if not keywords and pattern:
-                keywords = [pattern]
-                
-            match_type = trigger.get("match_type", "any")
-            matched = [kw for kw in keywords if (kw if case_sensitive else kw.lower()) in comment_check]
-
-            if (match_type == "any" and matched) or (match_type == "all" and len(matched) == len(keywords)):
-                return trigger
-        return None
-
-    def record_reply(self, uid: str):
+    async def record_reply(self, uid: str):
         now = time.time()
         self.stats['total_replies'] += 1
         self.user_reply_times[uid].append(now)

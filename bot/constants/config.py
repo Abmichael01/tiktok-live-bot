@@ -50,6 +50,7 @@ def ensure_config_exists():
 # Initialize config on import
 ensure_config_exists()
 
-# Simli Ultra-Realistic Avatar Config
-SIMLI_API_KEY = "er04arguoitpoer5v6i85"
-SIMLI_FACE_ID = "9facea83-ad2d-45f4-8f68-9061937a67ca"
+# Tavus Phoenix Configuration
+TAVUS_API_KEY = "264f2cf5c17c4c819123e4814836829d"
+TAVUS_PERSONA_ID = "pa290c2b7162"
+TAVUS_REPLICA_ID = "rf4e9d9790f0"

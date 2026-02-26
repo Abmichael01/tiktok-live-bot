@@ -39,6 +39,15 @@ class BotWorker:
                     
                     speech_text = f"Replying to @{user}... {processed_response}"
                     await self.bot.voice_agent.speak(speech_text, gesture=gesture, metadata={"user": user})
+                else:
+                    # If local voice agent isn't used, broadcast to WebSocket for Tavus avatar
+                    await self.bot.server.broadcast_ws({
+                        "type": "speaking",
+                        "status": True,
+                        "text": f"Replying to @{user}... {response}",
+                        "user": user,
+                        "gesture": "neutral"
+                    })
 
                 self.bot.reply_queue.task_done()
                 await asyncio.sleep(self.bot.state.settings.get('reply_cooldown_seconds', 3))

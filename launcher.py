@@ -105,8 +105,8 @@ class TikTokStudioLauncher:
         
         # Avatar View
         self.avatar_win = WebViewWindow(
-            "Live Avatar",
-            f"http://localhost:{self.port}/simli",
+            "Phoenix Avatar",
+            f"http://localhost:{self.port}/tavus",
             360, 640,
             is_vertical=True
         )

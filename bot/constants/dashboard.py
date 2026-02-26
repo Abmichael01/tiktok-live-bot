@@ -187,7 +187,9 @@ DASHBOARD_HTML = """
                     <div class="step-badge">1</div>
                     <h3>Launch Avatar</h3>
                     <p>Open the standalone Avatar window. It has a built-in green screen for TikTok Studio.</p>
-                    <button onclick="window.open('/simli', '_blank', 'width=360,height=640')" class="btn-secondary" style="margin-top: 15px; width: 100%; justify-content: center;">OPEN AVATAR</button>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button onclick="window.open('/tavus', '_blank', 'width=360,height=640')" class="btn-primary" style="width:100%; justify-content: center; background: #25F4EE; color: #000; box-shadow: 0 4px 15px rgba(37, 244, 238, 0.3);">OPEN PHOENIX AVATAR</button>
+                    </div>
                 </div>
 
                 <div class="guide-card">
@@ -218,17 +220,24 @@ DASHBOARD_HTML = """
                     <input type="text" id="tiktok-username" placeholder="@your-username">
                 </div>
                 <div class="field-group">
-                    <label>Simli API Key</label>
-                    <input type="text" id="simli-api-key" placeholder="Enter Key">
-                </div>
-                <div class="field-group">
-                    <label>Simli Face ID</label>
-                    <input type="text" id="simli-face-id" placeholder="Enter ID">
-                </div>
-                <div class="field-group">
                     <label>Signature Server (Custom)</label>
                     <input type="text" id="sign-server-url" placeholder="https://...">
                     <div style="font-size: 10px; color: var(--text-dim); margin-top: 4px;">Use this if you encounter connection errors or are in a restricted region.</div>
+                </div>
+                <div style="padding: 15px; background: rgba(37, 244, 238, 0.05); border: 1px solid rgba(37, 244, 238, 0.1); border-radius: 12px; margin-top: 5px;">
+                    <h4 style="font-size: 12px; color: var(--secondary); margin-bottom: 12px; text-transform: uppercase;">Tavus Phoenix Configuration</h4>
+                    <div class="field-group" style="margin-bottom: 15px;">
+                        <label>Tavus API Key</label>
+                        <input type="text" id="tavus-api-key" placeholder="Enter Tavus Key">
+                    </div>
+                    <div class="field-group" style="margin-bottom: 15px;">
+                        <label>Tavus Persona ID</label>
+                        <input type="text" id="tavus-persona-id" placeholder="Enter Persona ID">
+                    </div>
+                    <div class="field-group">
+                        <label>Tavus Replica ID</label>
+                        <input type="text" id="tavus-replica-id" placeholder="Enter Replica ID">
+                    </div>
                 </div>
                 <div class="field-group">
                     <label>Avatar Dimensions (Portrait: 360x640)</label>
@@ -271,10 +280,11 @@ DASHBOARD_HTML = """
                     updateStats(data.stats);
                     updateUIStatus(data.connected);
                     if (data.settings) {
-                        document.getElementById('simli-api-key').value = data.settings.simli_api_key || "";
-                        document.getElementById('simli-face-id').value = data.settings.simli_face_id || "";
                         document.getElementById('tiktok-username').value = data.settings.tiktok_username || "";
                         document.getElementById('sign-server-url').value = data.settings.sign_server_url || "";
+                        document.getElementById('tavus-api-key').value = data.settings.tavus_api_key || "";
+                        document.getElementById('tavus-persona-id').value = data.settings.tavus_persona_id || "";
+                        document.getElementById('tavus-replica-id').value = data.settings.tavus_replica_id || "";
                         document.getElementById('username-input-lock').value = data.settings.tiktok_username || "";
                     }
                 } else if (data.type === 'settings_saved') {
@@ -333,9 +343,10 @@ DASHBOARD_HTML = """
                 action: 'save_settings', 
                 settings: {
                     tiktok_username: document.getElementById('tiktok-username').value.trim(),
-                    simli_api_key: document.getElementById('simli-api-key').value.trim(),
-                    simli_face_id: document.getElementById('simli-face-id').value.trim(),
-                    sign_server_url: document.getElementById('sign-server-url').value.trim()
+                    sign_server_url: document.getElementById('sign-server-url').value.trim(),
+                    tavus_api_key: document.getElementById('tavus-api-key').value.trim(),
+                    tavus_persona_id: document.getElementById('tavus-persona-id').value.trim(),
+                    tavus_replica_id: document.getElementById('tavus-replica-id').value.trim()
                 }
             }));
         }
